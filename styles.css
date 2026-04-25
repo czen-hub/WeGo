@@ -63,3 +63,42 @@ nav ul li a:hover { color: var(--secondary); }
    7. FOOTER (Placeholders for your existing setup)
    ========================================= */
 footer { background: var(--dark); color: var(--white); padding: 60px 0 20px; text-align: center; }
+
+/* =========================================
+   11. MOBILE RESPONSIVENESS (The Final Polish)
+   ========================================= */
+@media (max-width: 768px) {
+    /* Stack the hero text so it doesn't look squashed */
+    .hero h2 { font-size: 32px; }
+    .hero p { font-size: 16px; }
+
+    /* Make the 12-column grid turn into a single column on phones */
+    .dashboard-grid, .service-row, .form-row { 
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* Make every panel take up the full width of the phone */
+    .stats-panel, .map-view, .service-text, .service-graphic {
+        grid-column: span 12 !important;
+        width: 100%;
+        padding: 20px;
+    }
+
+    /* Fix the navigation so it doesn't overlap the logo */
+    header .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    nav ul li a {
+        margin: 0 10px;
+        font-size: 14px;
+    }
+}
