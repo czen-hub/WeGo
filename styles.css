@@ -42,65 +42,85 @@ nav ul li a:hover { color: var(--secondary); }
 .hero-ctas a:hover { background: var(--white); color: var(--primary); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2); }
 
 /* =========================================
-   5. GRIDS & CARDS (FUN FACTS & FEATURES)
+   5. FEATURE CARDS & GRIDS
    ========================================= */
-.feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+.feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; padding: 40px 0;}
 .feature-card { background: var(--light); padding: 40px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.3s ease; border-top: 4px solid var(--primary); }
 .feature-card:hover { transform: translateY(-10px); }
 .feature-card h3 { color: var(--dark); margin-bottom: 15px; font-size: 26px; font-weight: 800; }
 .feature-card p { font-size: 16px; opacity: 0.8; }
 
 .dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
+.stats-panel { background: var(--white); padding: 25px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
 
 /* =========================================
-   6. SERVICES LAYOUT
+   6. SERVICES LAYOUT (Home & Services Page)
    ========================================= */
+.service-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 40px 0; }
+.service-item { background: var(--white); padding: 35px; border-radius: 12px; border-left: 6px solid var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.03); transition: 0.3s ease; }
+.service-item:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0, 71, 255, 0.1); }
+.service-item h3 { color: var(--dark); font-size: 22px; margin-bottom: 12px; }
+.service-item p { font-size: 16px; opacity: 0.8; }
+
 .service-row { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; margin-bottom: 40px; }
+.service-row.reverse-row { direction: rtl; }
+.service-row.reverse-row .service-text { direction: ltr; }
 .service-text h3 { font-size: 28px; color: var(--primary); margin-bottom: 15px; }
 .service-text p { font-size: 18px; line-height: 1.6; }
+.service-text ul { list-style: none; padding: 0; }
+.service-text ul li { font-size: 16px; margin-bottom: 12px; padding-left: 30px; position: relative; }
+.service-text ul li::before { content: '✓'; color: var(--primary); position: absolute; left: 0; font-weight: bold; font-size: 18px; }
+
+.service-graphic { background: #e0e6ed; height: 400px; border-radius: 12px; border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center; color: var(--dark); font-weight: 700; opacity: 0.8; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
 
 /* =========================================
-   7. FOOTER (Placeholders for your existing setup)
+   7. CONTACT FORM
    ========================================= */
-footer { background: var(--dark); color: var(--white); padding: 60px 0 20px; text-align: center; }
+.contact-form { display: flex; flex-direction: column; gap: 20px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.contact-form input, .contact-form select, .contact-form textarea { width: 100%; padding: 15px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; background: #f9fbfd; transition: 0.3s; }
+.contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 71, 255, 0.1); }
+.contact-form textarea { resize: vertical; }
+.submit-btn { width: 100%; }
 
 /* =========================================
-   11. MOBILE RESPONSIVENESS (The Final Polish)
+   8. RICH FOOTER
+   ========================================= */
+footer { background: var(--dark); color: var(--white); padding: 60px 0 20px; }
+.footer-content { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 30px; margin-bottom: 20px; flex-wrap: wrap; gap: 20px; }
+.footer-logo h2 { font-size: 32px; font-weight: 800; letter-spacing: -1px; color: var(--white); margin-bottom: 5px; }
+.footer-logo p { opacity: 0.7; font-size: 16px; }
+.social-links a { color: var(--white); text-decoration: none; margin-left: 25px; font-weight: 600; transition: 0.3s; opacity: 0.8; }
+.social-links a:hover { color: var(--secondary); opacity: 1; }
+.footer-bottom { text-align: center; opacity: 0.5; font-size: 14px; }
+
+/* =========================================
+   9. MOBILE RESPONSIVENESS (The Final Polish)
    ========================================= */
 @media (max-width: 768px) {
-    /* Stack the hero text so it doesn't look squashed */
+    /* Stack the hero text and buttons so they don't look squashed */
+    .hero-ctas a { margin-bottom: 15px !important; }
     .hero h2 { font-size: 32px; }
     .hero p { font-size: 16px; }
 
-    /* Force the grids to stack vertically */
-    .dashboard-grid, .service-row, .form-row { 
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 30px;
-    }
+    /* Force grids to stack vertically */
+    .dashboard-grid, .service-row { display: flex !important; flex-direction: column !important; gap: 30px; }
 
-    /* Target ALL divs inside the grids to take full width and remove the desktop padding */
-    .dashboard-grid > div, 
-    .service-row > div {
-        width: 100% !important;
-        grid-column: span 12 !important;
-        padding-right: 0 !important; 
-        padding-left: 0 !important;
-    }
+    /* Target ALL divs inside grids to take full width and remove padding */
+    .dashboard-grid > div, .service-row > div { width: 100% !important; grid-column: span 12 !important; padding-right: 0 !important; padding-left: 0 !important; }
 
-    /* Fix the navigation so it doesn't overlap the logo */
-    header .container {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    nav ul li a {
-        margin: 0 10px;
-        font-size: 14px;
-    }
+    /* Nav Fix */
+    header .container { flex-direction: column; gap: 15px; }
+    nav ul { flex-wrap: wrap; justify-content: center; }
+    nav ul li a { margin: 0 10px; font-size: 14px; }
+
+    /* Form Fix */
+    .contact-form { display: flex !important; flex-direction: column !important; width: 100% !important; }
+    .form-row { display: flex !important; flex-direction: column !important; gap: 20px !important; }
+    .contact-form input, .contact-form select, .contact-form textarea { width: 100% !important; max-width: 100% !important; box-sizing: border-box !important; padding: 15px !important; font-size: 16px !important; }
+    .submit-btn { width: 100% !important; padding: 18px !important; font-size: 18px !important; }
+
+    /* Footer Fix */
+    .footer-content { flex-direction: column; text-align: center; }
+    .social-links a { margin: 0 10px; }
 }
