@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earnings Calculator | WeGo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo"><a href="index.html">WeGo</a></div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="features.html">Features</a></li>
+                    <li><a href="calculator.html" style="color: var(--secondary);">Calculator</a></li>
+                </ul>
+            </nav>
+            <a href="contact.html" class="cta">Join the 1,000</a>
+        </div>
+    </header>
+
+    <main>
+        <section style="padding: 80px 0; background: var(--white);">
+            <div class="container">
+                <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+                    <h1 style="font-size: 42px; color: var(--dark); margin-bottom: 15px;">Calculate Your Real Worth</h1>
+                    <p style="font-size: 18px; color: #555; max-width: 700px; margin: 0 auto;">Adjust the sliders to match your driving habits. See your hourly wage, and exactly how much the corporate apps take from you every year.</p>
+                </div>
+
+                <div class="service-row" style="gap: 40px; align-items: stretch;">
+
+                    <!-- LEFT PANEL: Inputs -->
+                    <div class="calculator-mockup" style="flex: 1; padding: 40px;">
+                        <h3 style="margin-bottom: 30px; font-size: 24px;">Your Driving Habits</h3>
+
+                        <div style="margin-bottom: 30px;">
+                            <label style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 10px;">
+                                Average Fare Passenger Pays: <span id="fareValue" style="color: var(--primary);">$22.00</span>
+                            </label>
+                            <input type="range" id="avgFare" min="8" max="100" step="1" value="22" style="width: 100%; cursor: pointer;">
+                            <small style="color: #888;">Bay Area avg $18–28. Airport rides push this higher.</small>
+                        </div>
+
+                        <div style="margin-bottom: 30px;">
+                            <label style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 10px;">
+                                Rides Per Day: <span id="ridesValue" style="color: var(--primary);">8</span>
+                            </label>
+                            <input type="range" id="ridesPerDay" min="1" max="20" step="1" value="8" style="width: 100%; cursor: pointer;">
+                            <small style="color: #888;">Realistic: 6–12 full-time, 3–5 part-time.</small>
+                        </div>
+
+                        <div style="margin-bottom: 30px;">
+                            <label style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 10px;">
+                                Days Driven Per Week: <span id="daysValue" style="color: var(--primary);">5</span>
+                            </label>
+                            <input type="range" id="daysPerWeek" min="1" max="7" step="1" value="5" style="width: 100%; cursor: pointer;">
+                        </div>
+
+                        <div style="margin-bottom: 30px;">
+                            <label style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 10px;">
+                                Hours Active Per Day: <span id="hoursValue" style="color: var(--primary);">8</span>
+                            </label>
+                            <input type="range" id="hoursPerDay" min="1" max="14" step="1" value="8" style="width: 100%; cursor: pointer;">
+                        </div>
+
+                        <div style="margin-bottom: 30px;">
+                            <label style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 10px;">
+                                Miles Driven Per Day: <span id="milesValue" style="color: var(--primary);">120</span>
+                            </label>
+                            <input type="range" id="milesPerDay" min="30" max="300" step="5" value="120" style="width: 100%; cursor: pointer;">
+                            <small style="color: #888;">Includes empty/deadhead miles between pickups.</small>
+                        </div>
+
+                        <div style="margin-bottom: 30px;">
+                            <label style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 10px;">
+                                Vehicle MPG: <span id="mpgValue" style="color: var(--primary);">32</span>
+                            </label>
+                            <input type="range" id="vehicleMpg" min="15" max="60" step="1" value="32" style="width: 100%; cursor: pointer;">
+                        </div>
+
+                        <div style="margin-bottom: 30px;">
+                            <label style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 10px;">
+                                Gas Price Per Gallon: <span id="gasValue" style="color: var(--primary);">$4.80</span>
+                            </label>
+                            <input type="range" id="gasPrice" min="2.50" max="7.00" step="0.10" value="4.80" style="width: 100%; cursor: pointer;">
+                            <small style="color: #888;">Bay Area avg Apr 2026 ~$4.70–$5.10.</small>
+                        </div>
+
+                        <div style="margin-bottom: 10px;">
+                            <label style="display: block; font-weight: bold; margin-bottom: 10px;">Which app are you currently on?</label>
+                            <select id="platformSelect" style="width: 100%; padding: 10px; font-size: 15px; cursor: pointer;">
+                                <option value="0.45">Uber (takes ~45%)</option>
+                                <option value="0.42">Lyft (takes ~42%)</option>
+                                <option value="0.435">Both / Not sure (avg ~43.5%)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT PANEL: Results -->
+                    <div class="calculator-mockup" style="flex: 1; padding: 40px; background: var(--dark); color: var(--white); border-top: 5px solid var(--secondary);">
+                        <h3 style="margin-bottom: 30px; font-size: 24px; color: var(--white);">Your Monthly Take-Home</h3>
+
+                        <!-- Other App Result -->
+                        <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                                <div style="font-size: 16px; opacity: 0.8;" id="otherAppLabel">Other App (45% take):</div>
+                                <div id="otherHourly" style="font-size: 14px; color: #FFCDCD;">≈ $0.00 / hr</div>
+                            </div>
+                            <div id="otherTakeHome" style="font-size: 32px; font-weight: bold; color: #FFCDCD; margin-top: 5px;">$0</div>
+                            <div style="font-size: 12px; opacity: 0.6; margin-top: 5px;">After platform fee, gas, and vehicle wear.</div>
+                        </div>
+
+                        <!-- WeGo Result -->
+                        <div style="margin-bottom: 20px; padding-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                                <div style="font-size: 16px; opacity: 0.8;">WeGo Cooperative (12% fee):</div>
+                                <div id="wegoHourly" style="font-size: 14px; color: #C8E6C9; font-weight: bold;">≈ $0.00 / hr</div>
+                            </div>
+                            <div id="wegoTakeHome" style="font-size: 32px; font-weight: bold; color: #C8E6C9; margin-top: 5px;">$0</div>
+                            <div style="font-size: 12px; opacity: 0.6; margin-top: 5px;">After 12% fee, $75/mo membership, gas, and vehicle wear.</div>
+                        </div>
+
+                        <!-- Year 1 Transparency Report -->
+                        <div style="margin-top: 20px; padding-top: 25px; border-top: 2px dashed rgba(255,255,255,0.3);">
+                            <h4 style="font-size: 18px; color: var(--white); margin-bottom: 15px;">Year 1 Transparency Report</h4>
+
+                            <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px;">
+                                <span id="otherTakeLabel">Other App take (45%):</span>
+                                <span id="yearlyOtherTake" style="color: #FFCDCD;">-$0</span>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px;">
+                                <span>WeGo total fees (year 1):</span>
+                                <span id="yearlyWeGoFees" style="color: #C8E6C9;">-$0</span>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px;">
+                                <span>Gas + vehicle wear (annual):</span>
+                                <span id="yearlyDrivingCosts" style="color: #FFCDCD;">-$0</span>
+                            </div>
+
+                            <div style="font-size: 11px; opacity: 0.5; margin-bottom: 20px;">*WeGo fees = 12% platform fee + $75/mo membership + $500 one-time founding share (year 1 only).</div>
+
+                            <!-- Extra Cash Box -->
+                            <div style="text-align: center; background: rgba(0, 209, 255, 0.1); border: 1px solid var(--secondary); padding: 20px; border-radius: 8px;">
+                                <div style="font-size: 16px; margin-bottom: 5px;">Extra Yearly Take-Home vs Other App</div>
+                                <div id="yearlyExtra" style="font-size: 38px; font-weight: 900; color: var(--secondary);">+$0</div>
+                                <div style="font-size: 12px; opacity: 0.9; margin-top: 5px;" id="extraNote">Even after paying for the app and your equity!</div>
+                            </div>
+
+                            <!-- Hourly Comparison -->
+                            <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                                <div style="font-size: 13px; opacity: 0.7; margin-bottom: 10px;">Effective hourly wage (after all costs):</div>
+                                <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 6px;">
+                                    <span id="otherHrLabel">Other App:</span>
+                                    <span id="otherHrFinal" style="color: #FFCDCD;">$0.00 / hr</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; font-size: 14px;">
+                                    <span>WeGo:</span>
+                                    <span id="wegoHrFinal" style="color: #C8E6C9; font-weight: bold;">$0.00 / hr</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="contact.html" class="cta" style="width: 100%; text-align: center; margin-top: 30px; display: block;">Lock In Your Spot Now</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const fareInput       = document.getElementById('avgFare');
+        const ridesInput      = document.getElementById('ridesPerDay');
+        const daysInput       = document.getElementById('daysPerWeek');
+        const hoursInput      = document.getElementById('hoursPerDay');
+        const milesInput      = document.getElementById('milesPerDay');
+        const mpgInput        = document.getElementById('vehicleMpg');
+        const gasInput        = document.getElementById('gasPrice');
+        const platformSelect  = document.getElementById('platformSelect');
+
+        const fareDisplay     = document.getElementById('fareValue');
+        const ridesDisplay    = document.getElementById('ridesValue');
+        const daysDisplay     = document.getElementById('daysValue');
+        const hoursDisplay    = document.getElementById('hoursValue');
+        const milesDisplay    = document.getElementById('milesValue');
+        const mpgDisplay      = document.getElementById('mpgValue');
+        const gasDisplay      = document.getElementById('gasValue');
+
+        function fmt(n) {
+            return '$' + Math.round(n).toLocaleString();
+        }
+
+        function calculateEarnings() {
+            const fare       = parseFloat(fareInput.value);
+            const rides      = parseInt(ridesInput.value);
+            const days       = parseInt(daysInput.value);
+            const hours      = parseInt(hoursInput.value);
+            const miles      = parseFloat(milesInput.value);
+            const mpg        = parseFloat(mpgInput.value);
+            const gas        = parseFloat(gasInput.value);
+            const otherTake  = parseFloat(platformSelect.value);
+
+            fareDisplay.innerText  = '$' + fare.toFixed(2);
+            ridesDisplay.innerText = rides;
+            daysDisplay.innerText  = days;
+            hoursDisplay.innerText = hours;
+            milesDisplay.innerText = miles;
+            mpgDisplay.innerText   = mpg;
+            gasDisplay.innerText   = '$' + gas.toFixed(2);
+
+            const platformNames = {
+                '0.45':  'Uber',
+                '0.42':  'Lyft',
+                '0.435': 'Other App'
+            };
+            const name = platformNames[String(otherTake)] || 'Other App';
+            const takePct = Math.round(otherTake * 100);
+
+            document.getElementById('otherAppLabel').innerText  = name + ' (' + takePct + '% take):';
+            document.getElementById('otherTakeLabel').innerText = name + ' take (' + takePct + '%):';
+            document.getElementById('otherHrLabel').innerText   = name + ':';
+
+            const weeksPerMonth  = 4.33;
+            const ridesPerMonth  = rides * days * weeksPerMonth;
+            const hoursPerMonth  = hours * days * weeksPerMonth;
+            const milesPerMonth  = miles * days * weeksPerMonth;
+
+            const grossMonthly   = fare * ridesPerMonth;
+
+            // Driving costs (same for both platforms)
+            const gasCostMonth   = (milesPerMonth / mpg) * gas;
+            const wearCostMonth  = milesPerMonth * 0.09; // $0.09/mi vehicle wear
+            const drivingCostsMo = gasCostMonth + wearCostMonth;
+
+            // Other App math
+            const otherNetBeforeCosts = grossMonthly * (1 - otherTake);
+            const otherNetMonth       = otherNetBeforeCosts - drivingCostsMo;
+            const otherHourly         = otherNetMonth / hoursPerMonth;
+
+            // WeGo math
+            const wegoFeeRate    = 0.12;
+            const wegoMembership = 75;
+            const wegoNetBeforeCosts = grossMonthly * (1 - wegoFeeRate);
+            const wegoNetMonth       = wegoNetBeforeCosts - drivingCostsMo - wegoMembership;
+            const wegoHourly         = wegoNetMonth / hoursPerMonth;
+
+            // Annual figures
+            const yearlyOtherTake   = grossMonthly * otherTake * 12;
+            const yearlyWeGoFees    = (grossMonthly * wegoFeeRate * 12) + (wegoMembership * 12) + 500;
+            const yearlyDrivingCosts = drivingCostsMo * 12;
+
+            const yearlyOtherNet    = otherNetMonth * 12;
+            const yearlyWeGoNet     = (wegoNetMonth * 12) - 500; // subtract one-time founding share
+            const yearlyExtra       = yearlyWeGoNet - yearlyOtherNet;
+
+            // Update UI
+            document.getElementById('otherTakeHome').innerText  = fmt(otherNetMonth);
+            document.getElementById('wegoTakeHome').innerText   = fmt(wegoNetMonth);
+            document.getElementById('otherHourly').innerText    = '≈ $' + otherHourly.toFixed(2) + ' / hr';
+            document.getElementById('wegoHourly').innerText     = '≈ $' + wegoHourly.toFixed(2) + ' / hr';
+            document.getElementById('otherHrFinal').innerText   = '$' + otherHourly.toFixed(2) + ' / hr';
+            document.getElementById('wegoHrFinal').innerText    = '$' + wegoHourly.toFixed(2) + ' / hr';
+
+            document.getElementById('yearlyOtherTake').innerText    = '-' + fmt(yearlyOtherTake);
+            document.getElementById('yearlyWeGoFees').innerText     = '-' + fmt(yearlyWeGoFees);
+            document.getElementById('yearlyDrivingCosts').innerText = '-' + fmt(yearlyDrivingCosts);
+
+            const sign = yearlyExtra >= 0 ? '+' : '';
+            document.getElementById('yearlyExtra').innerText = sign + '$' + Math.abs(Math.round(yearlyExtra)).toLocaleString();
+            document.getElementById('extraNote').innerText = yearlyExtra >= 0
+                ? 'Even after paying for the app and your equity!'
+                : 'Increase your ride volume or fare to see WeGo pull ahead.';
+        }
+
+        fareInput.addEventListener('input', calculateEarnings);
+        ridesInput.addEventListener('input', calculateEarnings);
+        daysInput.addEventListener('input', calculateEarnings);
+        hoursInput.addEventListener('input', calculateEarnings);
+        milesInput.addEventListener('input', calculateEarnings);
+        mpgInput.addEventListener('input', calculateEarnings);
+        gasInput.addEventListener('input', calculateEarnings);
+        platformSelect.addEventListener('change', calculateEarnings);
+
+        calculateEarnings();
+    </script>
+</body>
+</html>
